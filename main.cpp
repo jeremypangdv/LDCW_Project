@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main() {
@@ -6,6 +7,12 @@ int main() {
     int category;
     int budget;
     int userType;
+    int voucherType;
+    int deliveryOption;
+    double productPrice;
+    double discount = 0.0;
+    double deliveryFee = 0.0;
+    double finalTotal;
 
     cout << "============================================" << endl;
     cout << " Shopee Product Recommendation Assistant" << endl;
@@ -81,8 +88,65 @@ int main() {
 
     } else if (choice == 2) {
         cout << endl;
-        cout << "Checkout summary feature selected." << endl;
-        cout << "This feature will be added in the next stage." << endl;
+        cout << "Shopee Checkout Summary" << endl;
+        cout << "-----------------------" << endl;
+
+        cout << "Enter product price (RM): ";
+        cin >> productPrice;
+
+        cout << endl;
+        cout << "Choose voucher type:" << endl;
+        cout << "1. No voucher" << endl;
+        cout << "2. RM5 discount voucher" << endl;
+        cout << "3. 10% discount voucher" << endl;
+        cout << "Enter voucher choice: ";
+        cin >> voucherType;
+
+        if (voucherType == 1) {
+            discount = 0.0;
+        } else if (voucherType == 2) {
+            discount = 5.0;
+        } else if (voucherType == 3) {
+            discount = productPrice * 0.10;
+        } else {
+            cout << "Invalid voucher choice. No discount applied." << endl;
+            discount = 0.0;
+        }
+
+        cout << endl;
+        cout << "Choose delivery option:" << endl;
+        cout << "1. Standard delivery (RM4.90)" << endl;
+        cout << "2. Express delivery (RM9.90)" << endl;
+        cout << "3. Free shipping campaign" << endl;
+        cout << "Enter delivery choice: ";
+        cin >> deliveryOption;
+
+        if (deliveryOption == 1) {
+            deliveryFee = 4.90;
+        } else if (deliveryOption == 2) {
+            deliveryFee = 9.90;
+        } else if (deliveryOption == 3) {
+            deliveryFee = 0.0;
+        } else {
+            cout << "Invalid delivery choice. Standard delivery applied." << endl;
+            deliveryFee = 4.90;
+        }
+
+        finalTotal = productPrice - discount + deliveryFee;
+
+        if (finalTotal < 0) {
+            finalTotal = 0;
+        }
+
+        cout << fixed << setprecision(2);
+        cout << endl;
+        cout << "Checkout Result" << endl;
+        cout << "---------------" << endl;
+        cout << "Product price: RM" << productPrice << endl;
+        cout << "Discount: RM" << discount << endl;
+        cout << "Delivery fee: RM" << deliveryFee << endl;
+        cout << "Final total: RM" << finalTotal << endl;
+        cout << "Reason: Shopee uses vouchers and delivery options to make online shopping cheaper and more convenient." << endl;
 
     } else if (choice == 3) {
         cout << endl;
